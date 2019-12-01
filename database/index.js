@@ -1,4 +1,4 @@
-const config = require ('../config');
+const config = require ('../config/');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(config.sequelize.dbName, config.sequelize.username, config.sequelize.password, {
   host: 'localhost',
@@ -23,18 +23,18 @@ class Photo extends Model{};
 Home.init({
   home_id: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
     autoIncrement: true, 
   },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
   }
-});
+}, { sequelize, modelName: 'home' });
 
 Photo.init({
   phone_id: {
     type: Sequelize.INTEGER,
-    autoIncrement: true
   },
   photoURL: {
     type: Sequelize.STRING,
@@ -47,9 +47,15 @@ Photo.init({
       key: 'home_id',
     }
   }
-});
+}, { sequelize, modelName: 'photo' });
 
 sequelize.sync({force: true});
 
-module.exports.Home = Home;
-module.exports.Photo = Photo;
+console.log('db was run!');
+// data base methods
+let create = () => {
+  console.log('nothing yet');
+};
+
+
+module.exports.create = create;
