@@ -29,6 +29,18 @@ Home.init({
   title: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  price: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  review: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: true,
   }
 }, { sequelize, modelName: 'home' });
 
@@ -51,10 +63,9 @@ Photo.init({
 
 sequelize.sync({force: true});
 
-console.log('db was run!');
 // data base methods
-let create = () => {
-  console.log('nothing yet');
+let create = ({interiorPicLinks, price, }) => {
+  
 };
 
 

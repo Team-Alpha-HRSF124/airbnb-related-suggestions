@@ -9,7 +9,7 @@ console.log('seed was run');
 fsAsync.readFileAsync(path.resolve(__dirname, pathToData))
   .then((data) => {
     var deserialized = JSON.parse(data);
-    console.log(deserialized.type);
+    console.log(deserialized);
   }).then(() => {
     console.log('so far so good...');
   }).catch((err) => {
