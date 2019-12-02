@@ -59,17 +59,19 @@ Photo.init({
   }
 }, { sequelize, modelName: 'photo' });
 
-sequelize.sync({force: true});
+sequelize.sync();
 
 // data base methods
-let create = ({interiorPicLinks, price, review, title, type}, callback) => {
+let create = ({interiorPicLinks, price, review, title, type}, callback = ()=>{}) => {
   // create for home entry
   // followed by creation of photo entries
-  Home.create({
-    title: title,
-    price: price,
-    review: review,
-    type: type
+  sequelize.sync().then(() => {
+    return Home.create({
+      title: title,
+      price: price,
+      review: review,
+      type: type
+    });
   }).then((newlyCreatedRowForHome) => {
     var photoLinkInsertions = interiorPicLinks.map((singleLink) => (
       Photo.create({
@@ -86,5 +88,10 @@ let create = ({interiorPicLinks, price, review, title, type}, callback) => {
   });
 };
 
+// just to make sure the database is synced with the models
+let sync = () => {
+  sequelize.sync();
+};
 
 module.exports.create = create;
+module.exports.sync = sync;

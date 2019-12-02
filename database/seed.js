@@ -14,7 +14,7 @@ fsAsync.readFileAsync(path.resolve(__dirname, pathToData))
     });
     return Promise.all(insertionList);
   }).then(() => {
-    console.log('so far so good...');
+    console.log('Seeding completed!');
   }).catch((err) => {
     console.log('error encountered while reading file...', err);
   });
