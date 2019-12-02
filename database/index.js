@@ -1,5 +1,6 @@
 const config = require ('../config/');
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const Promise = require('bluebird');
 const sequelize = new Sequelize(config.sequelize.dbName, config.sequelize.username, config.sequelize.password, {
   host: 'localhost',
@@ -59,7 +60,7 @@ Photo.init({
   }
 }, { sequelize, modelName: 'photo' });
 
-sequelize.sync();
+// sequelize.sync();
 
 // data base methods
 let create = ({interiorPicLinks, price, review, title, type}, callback = ()=>{}) => {
@@ -89,8 +90,14 @@ let create = ({interiorPicLinks, price, review, title, type}, callback = ()=>{})
 };
 
 // retrieve some number of listings and return them as object to be parsed
-let findAll = () => {
-  
+let findMultiple = (arrayOfRandomNumbers) => {
+  return Home.findAll({
+    where: {
+      home_id: {
+        [Op.or]: arrayOfRandomNumbers
+      }
+    }
+  })
 };
 
 // just to make sure the database is synced with the models
@@ -100,4 +107,4 @@ let sync = () => {
 
 module.exports.create = create;
 module.exports.sync = sync;
-module.exports.findAll = findAll;
+module.exports.findMultiple = findMultiple;
