@@ -88,6 +88,11 @@ let create = ({interiorPicLinks, price, review, title, type}, callback = ()=>{})
   });
 };
 
+// retrieve some number of listings and return them as object to be parsed
+let findAll = () => {
+  
+};
+
 // just to make sure the database is synced with the models
 let sync = () => {
   sequelize.sync();
@@ -95,3 +100,4 @@ let sync = () => {
 
 module.exports.create = create;
 module.exports.sync = sync;
+module.exports.findAll = findAll;
