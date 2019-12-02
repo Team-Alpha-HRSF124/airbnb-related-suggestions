@@ -1,5 +1,6 @@
 const config = require ('../config/');
 const Sequelize = require('sequelize');
+const Promise = require('bluebird');
 const sequelize = new Sequelize(config.sequelize.dbName, config.sequelize.username, config.sequelize.password, {
   host: 'localhost',
   dialect: 'mysql'
@@ -45,9 +46,6 @@ Home.init({
 }, { sequelize, modelName: 'home' });
 
 Photo.init({
-  phone_id: {
-    type: Sequelize.INTEGER,
-  },
   photoURL: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -64,8 +62,28 @@ Photo.init({
 sequelize.sync({force: true});
 
 // data base methods
-let create = ({interiorPicLinks, price, }) => {
-  
+let create = ({interiorPicLinks, price, review, title, type}, callback) => {
+  // create for home entry
+  // followed by creation of photo entries
+  Home.create({
+    title: title,
+    price: price,
+    review: review,
+    type: type
+  }).then((newlyCreatedRowForHome) => {
+    var photoLinkInsertions = interiorPicLinks.map((singleLink) => (
+      Photo.create({
+        photoURL: singleLink,
+        home_id: newlyCreatedRowForHome.home_id
+      })
+    ));
+    return Promise.all(photoLinkInsertions);
+  }).then(() => {
+    console.log(`entry for ${title} created!`);
+    callback();
+  }).catch((err) => {
+    console.log('error encountered during data insertion...', err);
+  });
 };
 
 

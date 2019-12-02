@@ -9,7 +9,10 @@ console.log('seed was run');
 fsAsync.readFileAsync(path.resolve(__dirname, pathToData))
   .then((data) => {
     var deserialized = JSON.parse(data);
-    console.log(deserialized);
+    var insertionList = deserialized.map((singleListing) => {
+      db.create(singleListing);
+    });
+    return Promise.all(insertionList);
   }).then(() => {
     console.log('so far so good...');
   }).catch((err) => {
