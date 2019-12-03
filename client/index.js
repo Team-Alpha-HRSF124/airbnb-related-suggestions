@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CSSTransitionGroup } from 'react-transition-group';
 import sampleData from './assets/sampleData';
 import PictureUnit from './components/PictureUnit';
 import LeftArrowMain from './components/LeftArrowMain';
@@ -45,7 +46,7 @@ class App extends React.Component {
         <LeftArrowMain onClick={ () => { this.handleLeftArrowClick() } } />
           {
             unitsToRender.map((pictureIndex) => (
-              <PictureUnit listingDetail={this.state.rawData[pictureIndex]} />
+              <PictureUnit key={this.state.rawData[pictureIndex].interiorPicLinks[0]} listingDetail={this.state.rawData[pictureIndex]} />
             ))
           }
         <RightArrowMain onClick={ () => { this.handleRightArrowClick() } } />

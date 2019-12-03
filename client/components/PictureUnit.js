@@ -5,6 +5,7 @@ class PictureUnit extends React.Component {
     super(props);
     this.state = {
       currentPicture: 0,
+      focused: false,
       pictureArray: this.props.listingDetail.interiorPicLinks,
       price: this.props.listingDetail.price,
       review: this.props.listingDetail.review,
@@ -29,6 +30,18 @@ class PictureUnit extends React.Component {
     // debugger;
   }
 
+  onMouseEnter() {
+    this.setState({
+      focused: true
+    })
+  }
+
+  onMouseLeave() {
+    this.setState({
+      focused: false
+    })
+  }
+
   handleLeftArrowClick() {
     // transition into previous picture
   }
@@ -39,7 +52,8 @@ class PictureUnit extends React.Component {
 
   render() {
     return (
-      <div>
+      <div onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
+        {this.state.focused ? <div>focused!</div> : <div></div>}
         <img src={this.state.pictureArray[this.state.currentPicture]} height='200' width='auto'></img>
       </div>
     )
