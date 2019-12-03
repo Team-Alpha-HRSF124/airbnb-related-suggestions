@@ -5,8 +5,28 @@ class PictureUnit extends React.Component {
     super(props);
     this.state = {
       currentPicture: 0,
-      pictureArray: this.props.pictureLinks
+      pictureArray: this.props.listingDetail.interiorPicLinks,
+      price: this.props.listingDetail.price,
+      review: this.props.listingDetail.review,
+      title: this.props.listingDetail.title,
+      type: this.props.listingDetail.type
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.listingDetail.price !== prevProps.listingDetail.price || this.props.listingDetail.title !== prevProps.listingDetail.title) {
+      this.setState({
+        pictureArray: this.props.listingDetail.interiorPicLinks,
+        price: this.props.listingDetail.price,
+        review: this.props.listingDetail.review,
+        title: this.props.listingDetail.title,
+        type: this.props.listingDetail.type
+      })
+    }
+  }
+
+  componentDidMount() {
+    // debugger;
   }
 
   handleLeftArrowClick() {
@@ -19,7 +39,9 @@ class PictureUnit extends React.Component {
 
   render() {
     return (
-      <div>PictureUnit Placeholder {this.state.pictureArray}</div>
+      <div>
+        <img src={this.state.pictureArray[this.state.currentPicture]} height='200' width='auto'></img>
+      </div>
     )
   }
 };
