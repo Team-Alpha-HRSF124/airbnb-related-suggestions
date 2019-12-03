@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "build": "webpack -d -w",
     "start": "nodemon --inspect ./server/",
     "db:pre-migrate": "node ./database/create.js",
@@ -27,10 +27,17 @@
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "express": "^4.17.1",
     "jest": "^24.9.0",
+    "jest-enzyme": "^7.1.2",
     "mysql2": "^2.0.1",
     "nodemon": "^2.0.1",
+    "react-addons-test-utils": "^15.6.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }
