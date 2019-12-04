@@ -58,6 +58,8 @@ class App extends React.Component {
   }
 }
 
+// export default App;
+
 ReactDOM.render(<App sampleData={sampleData} />, document.getElementById('app'));
 
 
