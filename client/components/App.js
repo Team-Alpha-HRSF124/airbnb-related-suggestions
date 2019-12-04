@@ -6,7 +6,7 @@ import LeftArrowMain from './LeftArrowMain';
 import RightArrowMain from './RightArrowMain';
 
 // style import
-import style from './style/index.scss';
+import style from '../style/index.scss';
 
 class App extends React.Component {
   constructor(props) {

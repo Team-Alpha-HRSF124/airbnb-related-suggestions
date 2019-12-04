@@ -9,12 +9,11 @@ const Promise = require('bluebird');
 // we are just going to choose 8 numbers randomly between 1 and 100
 
 router.get('/somelistings', (req, res, next) => {
-  debugger;
-  var randomeDraw = helper.randomize(100);
-  db.findMultiple(randomeDraw)
+  var randomDraw = helper.randomize(100);
+  db.findMultiple(randomDraw)
     .then((data) => {
       console.log('data retrieved!');
-      res.write(data);
+      res.write(JSON.stringify(data));
       res.status(200).end();
     }).catch((err) => {
       console.log('error encountered during data retrieval... ', err);
