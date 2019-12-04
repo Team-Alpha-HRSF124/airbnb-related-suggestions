@@ -6,6 +6,9 @@ import PictureUnit from './components/PictureUnit';
 import LeftArrowMain from './components/LeftArrowMain';
 import RightArrowMain from './components/RightArrowMain';
 
+// style import
+import style from './style/index.scss';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +45,7 @@ class App extends React.Component {
   render() {
     var unitsToRender = [this.state.centerIndex - 1, this.state.centerIndex, this.state.centerIndex + 1]; 
     return (
-      <span>
+      <span className="main">
         <LeftArrowMain onClick={ () => { this.handleLeftArrowClick() } } />
           {
             unitsToRender.map((pictureIndex) => (

@@ -52,9 +52,9 @@ class PictureUnit extends React.Component {
 
   render() {
     return (
-      <div onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
+      <div className="imageContainer" onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
         {this.state.focused ? <div>focused!</div> : <div></div>}
-        <img src={this.state.pictureArray[this.state.currentPicture]} height='200' width='auto'></img>
+        <img className="images" src={this.state.pictureArray[this.state.currentPicture]} height='200' width='auto'></img>
       </div>
     )
   }

@@ -34,6 +34,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.9.0",
+    "css-loader": "^3.2.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
@@ -42,8 +43,11 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.2",
     "mysql2": "^2.0.1",
+    "node-sass": "^4.13.0",
     "nodemon": "^2.0.1",
     "react-addons-test-utils": "^15.6.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }

@@ -9,7 +9,9 @@ import TestComponent from './testComponent';
 describe('Should behave expectedly', () => {
   it('should render expected texts', () => {
     const wrapper = shallow(<TestComponent />);
-    const text = wrapper.find('div');
+    const text = wrapper.find('div div');
+    const text2 = wrapper.find('div span');
     expect(text.text()).toBe("Hello!");
+    // expect(text2.text()).toBe("Hello To You Too!");
   });
 });

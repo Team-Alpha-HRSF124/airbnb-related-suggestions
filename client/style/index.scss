@@ -1,0 +1,48 @@
+$mainComponentClassName: 'main';
+$imageClassName: 'images';
+$arrowContainerClassName: 'arrowContainers';
+$arrowClassName: 'arrows';
+$imageContainerClassName: 'imageContainer';
+
+// main component container styling
+#app {
+  vertical-align: middle;
+  justify-content: center;
+}
+
+// Main component sizing
+.#{$mainComponentClassName} {
+  display: flex;
+  width: 70%;
+  height: 30%;
+  min-width: 500px;
+  justify-content: center;
+}
+
+// left and right arrow styling
+.#{$arrowContainerClassName} {
+  width: 25px;
+  .#{$arrowClassName} {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+}
+
+// Picture sizing
+.#{$imageContainerClassName} {
+  width: 30%;
+  height: 100%;
+  margin: 2px;
+  .#{$imageClassName} {
+    border-radius: 2%;
+    object-fit: cover;
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+}
