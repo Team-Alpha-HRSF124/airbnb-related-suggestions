@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
-import PictureUnit from './PictureUnit';
+import Card from './Card';
 import LeftArrowMain from './LeftArrowMain';
 import RightArrowMain from './RightArrowMain';
 
 // style import
-import style from '../style/index.scss';
+import '../style/index.scss';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      centerIndex: 1,
-      rawData: this.props.sampleData,
+      activeCardIndex: 1,
+      activeCard: this.props.sampleData[0],
+      cardArray: this.props.sampleData,
     }
   }
 
@@ -22,38 +23,44 @@ class App extends React.Component {
   }
 
   handleLeftArrowClick() {
-    // slide the picture unit to the right
-    if (this.state.centerIndex === 1) {
-      return;
-    }
+    // move activeCardIndex to the left
+    if (this.state.activeCardIndex === 1) { return }
+    const nextIndex = this.state.activeCardIndex - 1;
     this.setState({
-      centerIndex: this.state.centerIndex - 1
+      activeCardIndex: nextIndex,
+      activeCard: this.state.cardArray[nextIndex]
     });
   }
 
-  handleRightArrowClick(){
-    // slide the picture unit to the left
-    if (this.state.centerIndex === this.state.rawData.length - 2) {
-      return;
-    }
+  handleRightArrowClick() {
+    // move activeCardIndex to the right
+    if (this.state.activeCardIndex === this.state.cardArray.length - 2) { return }
+    const nextIndex = this.state.activeCardIndex + 1;
     this.setState({
-      centerIndex: this.state.centerIndex + 1
+      activeCardIndex: nextIndex,
+      activeCard: this.state.cardArray[nextIndex]
     });
   }
 
   render() {
-    var unitsToRender = [this.state.centerIndex - 1, this.state.centerIndex, this.state.centerIndex + 1]; 
+    const {activeCardIndex, activeCard, cardArray} = this.state;
     return (
-      <span className="main">
-        <LeftArrowMain onClick={ () => { this.handleLeftArrowClick() } } />
-          {
-            unitsToRender.map((pictureIndex) => (
-              <PictureUnit key={this.state.rawData[pictureIndex].interiorPicLinks[0]} listingDetail={this.state.rawData[pictureIndex]} />
-            ))
-          }
-        <RightArrowMain onClick={ () => { this.handleRightArrowClick() } } />
-      </span>
-    )
+      <div className="main">
+        <div className="arrow-button-containers"><button onClick={ () => { this.handleLeftArrowClick() } } className="arrow-buttons">⬅</button></div>
+        <div className="main-container">
+          <div className={`card-container-wrapper active-card-${activeCardIndex}`}>
+            <div className="card-container" style={{'transform': `translateX(-${(activeCardIndex - 1) * (100 / cardArray.length)}%)`}}>
+              {
+                cardArray.map((card, index) => (
+                  <Card _id={index} key={card.interiorPicLinks[0]} listingDetail={card} />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <div onClick={ () => { this.handleRightArrowClick() } } className="arrow-button-containers"><button onClick={ () => { this.handleLeftArrowClick() } } className="arrow-buttons">⬅</button></div>
+      </div>
+    );
   }
 }
 

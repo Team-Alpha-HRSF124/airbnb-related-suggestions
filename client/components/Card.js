@@ -1,9 +1,10 @@
 import React from 'react';
 
-class PictureUnit extends React.Component {
+class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      _id: this.props._id,
       currentPicture: 0,
       focused: false,
       pictureArray: this.props.listingDetail.interiorPicLinks,
@@ -51,13 +52,14 @@ class PictureUnit extends React.Component {
   }
 
   render() {
+    const {_id, pictureArray, currentPicture} = this.state;
     return (
-      <div className="imageContainer" onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
+      <div id={`card-${_id}`} className="card" onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
         {this.state.focused ? <div>focused!</div> : <div></div>}
-        <img className="images" src={this.state.pictureArray[this.state.currentPicture]} height='200' width='auto'></img>
+        <img className="images" src={pictureArray[currentPicture]} height='100%' width='auto'></img>
       </div>
     )
   }
 };
 
-export default PictureUnit;
+export default Card;
