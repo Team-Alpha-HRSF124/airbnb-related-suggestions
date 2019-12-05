@@ -1,10 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
+
+// styled components
+const Images = styled.img({
+  'border-radius': '2%',
+  'object-fit': 'cover',
+  'width': '100%',
+  '-webkit-user-select': 'none',
+  '-moz-user-select': 'none',
+  '-ms-user-select': 'none',
+  '-o-user-select': 'none',
+  'user-select': 'none',
+});
+
+const CardDiv = styled.div({
+  'width': '200px',
+  'height': '100%',
+  'margin': '2px',
+});
 
 class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: this.props._id,
       currentPicture: 0,
       focused: false,
       pictureArray: this.props.listingDetail.interiorPicLinks,
@@ -52,12 +70,12 @@ class Card extends React.Component {
   }
 
   render() {
-    const {_id, pictureArray, currentPicture} = this.state;
+    const {pictureArray, currentPicture} = this.state;
     return (
-      <div id={`card-${_id}`} className="card" onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
+      <CardDiv onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
         {this.state.focused ? <div>focused!</div> : <div></div>}
-        <img className="images" src={pictureArray[currentPicture]} height='99%' width='auto'></img>
-      </div>
+        <Images src={pictureArray[currentPicture]} height='99%' width='auto'></Images>
+      </CardDiv>
     )
   }
 };

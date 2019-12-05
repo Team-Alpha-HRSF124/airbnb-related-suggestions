@@ -22,10 +22,4 @@ router.get('/somelistings', (req, res, next) => {
 });
 
 
-
-
-
-
-
-
 module.exports = router;
