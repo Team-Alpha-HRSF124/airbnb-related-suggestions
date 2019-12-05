@@ -56,7 +56,7 @@ class Card extends React.Component {
     return (
       <div id={`card-${_id}`} className="card" onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
         {this.state.focused ? <div>focused!</div> : <div></div>}
-        <img className="images" src={pictureArray[currentPicture]} height='100%' width='auto'></img>
+        <img className="images" src={pictureArray[currentPicture]} height='99%' width='auto'></img>
       </div>
     )
   }
