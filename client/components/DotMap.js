@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // styled components
 const MainContainer = styled.div`
-  position: absolute;
+  position: relative;
   top: 90%;
   margin: auto;
   width: 120px;
@@ -13,6 +13,8 @@ const MainContainer = styled.div`
 
 const DotContainer = styled.div`
   position: absolute;
+  margin: auto;
+  width: 100%
   z-index: 0;
   display: flex;
   height: 100%;
@@ -20,13 +22,14 @@ const DotContainer = styled.div`
 `;
 
 const Dot = styled.div`
-  transition: 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  text-align: center;
+  transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
   flex: 1;
-`;
-
-const BigDot = styled(Dot)`
-  transform: scale(1.2);
-  flex: 1.2;
+  ${ props => {
+    if (props.focused) {
+      return 'transform: scale(2.0)';
+    }
+  } }
 `;
 
 // React component
@@ -36,15 +39,11 @@ const DotMap = (props) => {
 
   return (
     <MainContainer>
-      <DotContainer style={{transform: `translateX(-${currentIndex * (100 / pictureArrayLength)}%)`}}>
+      <DotContainer>  
         {
-          dotArray.map((dot, index) => {
-            if (index === currentIndex) {
-              return (<BigDot>O</BigDot>)
-            } else {
-              return (<Dot>O</Dot>)
-            }
-          })
+          dotArray.map((dot, index) => (
+            <Dot key={index} focused={index === currentIndex}>O</Dot>
+          ))
         }
       </DotContainer>
     </MainContainer>
