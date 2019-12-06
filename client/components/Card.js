@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Transition } from 'react-transition-group';
 // styled components
+
 const Images = styled.img({
+  'z-index': '0',
   'border-radius': '2%',
   'object-fit': 'cover',
   'width': '100%',
@@ -14,11 +16,77 @@ const Images = styled.img({
 });
 
 const CardDiv = styled.div({
+  'position': 'relative',
   'width': '200px',
   'height': '100%',
   'margin': '2px',
 });
 
+const LeftButton = styled.button({
+  'z-index': '1',
+  'position': 'absolute',
+  'border-radius': '50%',
+  'text-align': 'center',
+  'height': '30px',
+  'width': '30px',
+  'font-size': '100%',
+  'opacity': '0.9',
+  'top': '42%',
+  'left': '5%',
+  'focusable': 'false',
+  'outline': 'none'
+});
+
+const RightButton = styled.button({
+  'z-index': '1',
+  'position': 'absolute',
+  'border-radius': '50%',
+  'text-align': 'center',
+  'height': '30px',
+  'width': '30px',
+  'font-size': '100%',
+  'opacity': '0.9',
+  'top': '42%',
+  'left': '80%',
+  'focusable': 'false',
+  'outline': 'none'
+});
+
+const FavouriteButton = styled.button({
+  'z-index': '1',
+  'position': 'absolute',
+  'border-radius': '50%',
+  'text-align': 'center',
+  'height': '30px',
+  'width': '30px',
+  'font-size': '100%',
+  'opacity': '0.9',
+  'top': '2%',
+  'left': '80%',
+  'focusable': 'false',
+  'outline': 'none'
+});
+
+const DotMap = styled.div({
+  'position': 'absolute'
+});
+
+// transition variables
+const duration = 100;
+
+const defaultStyle = {
+  transition: `${duration}ms`,
+  transitionTimingFunction: 'ease-in'
+};
+
+const transitionStyles = {
+  entering: { opacity: 0.9 },
+  entered: { opacity: 0.9 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+}
+
+// React component
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -69,12 +137,29 @@ class Card extends React.Component {
     // transition into next picture
   }
 
+  handleFavouriteClick() {
+    // brings up favorite menu (bonus)
+  }
+
   render() {
-    const {pictureArray, currentPicture} = this.state;
+    const {focused, pictureArray, currentPicture} = this.state;
     return (
       <CardDiv onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
-        {this.state.focused ? <div>focused!</div> : <div></div>}
         <Images src={pictureArray[currentPicture]} height='99%' width='auto'></Images>
+        <Transition in={focused} timeout={duration}>
+          {
+            state => (
+              <div style={{
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}>
+                <LeftButton onClick={ () => { this.handleLeftArrowClick() } }>{`<`}</LeftButton>
+                <RightButton onClick={ () => { this.handleRightArrowClick() } }>{`>`}</RightButton>
+                <FavouriteButton onClick={ () => { this.handleFavouriteClick() } }>{`♡`}</FavouriteButton>
+              </div>
+            )
+          }
+        </Transition>
       </CardDiv>
     )
   }
