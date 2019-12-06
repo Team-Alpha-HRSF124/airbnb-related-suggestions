@@ -85,15 +85,13 @@ class App extends React.Component {
       <MainDiv>
         <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleLeftArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
         <MainContainer>
-          <div>
-            <CardContainer style={{'transform': `translateX(-${(activeCardIndex - 1) * (100 / cardArray.length)}%)`}}>
-              {
-                cardArray.map((card, index) => (
-                  <Card key={card.interiorPicLinks[0]} listingDetail={card} />
-                ))
-              }
-            </CardContainer>
-          </div>
+          <CardContainer style={{'transform': `translateX(-${(activeCardIndex - 1) * (100 / cardArray.length)}%)`}}>
+            {
+              cardArray.map((card, index) => (
+                <Card key={card.interiorPicLinks[0]} listingDetail={card} />
+              ))
+            }
+          </CardContainer>
         </MainContainer>
         <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleRightArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
       </MainDiv>
