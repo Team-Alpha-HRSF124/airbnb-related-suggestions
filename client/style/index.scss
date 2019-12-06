@@ -39,29 +39,23 @@ body {
 }
 
 // card container 
-.card-container {
-  z-index: 0;
-  position: absolute;
-  display: flex;
+
+.#{$cardClassName} {
+  width: 200px;
   height: 100%;
-  min-width: 600px;
-  transition: transform 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  .#{$cardClassName} {
-    width: 200px;
-    height: 100%;
-    margin: 2px;
-    .#{$imageClassName} {
-      border-radius: 2%;
-      object-fit: cover;
-      width: 100%;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -o-user-select: none;
-      user-select: none;
-    }
+  margin: 2px;
+  .#{$imageClassName} {
+    border-radius: 2%;
+    object-fit: cover;
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
 }
+
 
 // Selective Visibility
 $i: 0;
