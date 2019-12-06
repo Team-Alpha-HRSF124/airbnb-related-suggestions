@@ -17,13 +17,13 @@ const Images = styled.img({
 
 const CardDiv = styled.div({
   'position': 'relative',
-  'width': '200px',
+  'width': '205px',
   'height': '100%',
   'margin': '2px',
   'clip-path': 'inset(0px 0px 0px 0px)'
 });
 
-const LeftButton = styled.button({
+const LeftButton = styled.button({ 
   'z-index': '1',
   'position': 'absolute',
   'border-radius': '50%',
@@ -148,7 +148,7 @@ class Card extends React.Component {
 
   handleLeftArrowClick() {
     // transition into previous picture
-    if (this.state.currentPicture === this.state.pictureArray.lenght - 1) { return }
+    if (this.state.currentPicture === this.state.pictureArray.length - 1) { return }
     this.setState({
       currentPicture: this.state.currentPicture + 1
     });

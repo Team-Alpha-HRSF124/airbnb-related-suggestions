@@ -8,7 +8,7 @@ const MainDiv = styled.div({
   'display': 'flex',
   'height': '30%',
   'min-width': '500px',
-  'width': '735px',
+  'width': '750px',
 });
 
 const ArrowContainerDiv = styled.div({
@@ -28,7 +28,7 @@ const ArrowButtons = styled.button({
 });
 
 const MainContainer = styled.div({
-  'clip-path': 'inset(0px 0px 0px 0px)',
+  'clip-path': 'inset(0px 0px -5px 0px)',
   'flex': 10,
   'position': 'relative',
   'height': '300px'
