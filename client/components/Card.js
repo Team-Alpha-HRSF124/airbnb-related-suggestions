@@ -8,7 +8,8 @@ const Images = styled.img({
   'z-index': '0',
   'border-radius': '2%',
   'object-fit': 'cover',
-  'width': '100%',
+  'width': '99%',
+  'height': '80%',
   '-webkit-user-select': 'none',
   '-moz-user-select': 'none',
   '-ms-user-select': 'none',
@@ -18,56 +19,34 @@ const Images = styled.img({
 
 const CardDiv = styled.div({
   'position': 'relative',
-  'width': '205px',
+  'width': '333px',
   'height': '100%',
   'margin': '2px',
   'clip-path': 'inset(0px 0px 0px 0px)'
 });
 
-const LeftButton = styled.button({ 
-  'z-index': '1',
-  'position': 'absolute',
-  'border-radius': '50%',
-  'text-align': 'center',
-  'height': '30px',
-  'width': '30px',
-  'font-size': '100%',
-  'opacity': '0.9',
-  'top': '42%',
-  'left': '5%',
-  'focusable': 'false',
-  'outline': 'none'
-});
+const LeftButton = styled.button`
+  z-index: 1;
+  position: absolute;
+  border-radius: 50%;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  font-size: 100%;
+  opacity: 0.9;
+  top: 42%;
+  left: 5%;
+  focusable: false;
+  outline: none;
+`;
 
-const RightButton = styled.button({
-  'z-index': '1',
-  'position': 'absolute',
-  'border-radius': '50%',
-  'text-align': 'center',
-  'height': '30px',
-  'width': '30px',
-  'font-size': '100%',
-  'opacity': '0.9',
-  'top': '42%',
-  'left': '80%',
-  'focusable': 'false',
-  'outline': 'none'
-});
+const RightButton = styled(LeftButton)`
+  left: 80%;
+`;
 
-const FavouriteButton = styled.button({
-  'z-index': '1',
-  'position': 'absolute',
-  'border-radius': '50%',
-  'text-align': 'center',
-  'height': '30px',
-  'width': '30px',
-  'font-size': '100%',
-  'opacity': '0.9',
-  'top': '2%',
-  'left': '80%',
-  'focusable': 'false',
-  'outline': 'none'
-});
+const FavouriteButton = styled(RightButton)`
+  top: 2%;
+`;
 
 const SlideShowContainer = styled.div({
   'z-index': 0,
@@ -80,10 +59,37 @@ const SlideShowContainer = styled.div({
 
 const ImageContainer = styled.div({
   'position': 'relative',
-  'width': '200px',
+  'width': '333px',
   'height': '100%',
-  'margin': '2px',
+  'margin': '3px',
 });
+
+const InfoContainer = styled.div`
+  margin: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  font-family: sans-serif;
+`;
+
+const TypeDiv = styled.div`
+  font-size: 80%
+`;
+
+const TitleDiv = styled(TypeDiv)`
+  font-size: 90%;
+`;
+
+const PriceDiv = styled(TypeDiv)`
+  
+`;
+
+const ReviewDiv = styled(TypeDiv)`
+  position: absolute;
+  top: 0;
+  right: 3px;
+`;
 
 // transition variables
 const duration = 100;
@@ -111,7 +117,7 @@ class Card extends React.Component {
       price: this.props.listingDetail.price,
       review: this.props.listingDetail.review,
       title: this.props.listingDetail.title,
-      type: this.props.listingDetail.type
+      type: this.props.listingDetail.type,
     }
   }
 
@@ -145,18 +151,28 @@ class Card extends React.Component {
 
   handleLeftArrowClick() {
     // transition into previous picture
-    if (this.state.currentPicture === this.state.pictureArray.length - 1) { return }
-    this.setState({
-      currentPicture: this.state.currentPicture + 1
-    });
+    if (this.state.currentPicture === this.state.pictureArray.length - 1) {
+      this.setState({
+        currentPicture: 0
+      });
+    } else {
+      this.setState({
+        currentPicture: this.state.currentPicture + 1
+      });
+    }
   }
 
   handleRightArrowClick() {
     // transition into next picture
-    if (this.state.currentPicture === 0) { return }
-    this.setState({
-      currentPicture: this.state.currentPicture - 1
-    });
+    if (this.state.currentPicture === 0) {
+      this.setState({
+        currentPicture: this.state.pictureArray.length - 1
+      })
+    } else {
+      this.setState({
+        currentPicture: this.state.currentPicture - 1
+      });
+    }
   }
 
   handleFavouriteClick() {
@@ -164,7 +180,7 @@ class Card extends React.Component {
   }
 
   render() {
-    const {focused, pictureArray, currentPicture} = this.state;
+    const {type, price, review, title, focused, pictureArray, currentPicture} = this.state;
     return (
       <CardDiv onMouseEnter={ () => { this.onMouseEnter() } } onMouseLeave={ () => this.onMouseLeave() }>
         <SlideShowContainer style={{'transform': `translateX(-${currentPicture * (100 / pictureArray.length)}%)`}}>
@@ -191,6 +207,12 @@ class Card extends React.Component {
           }
         </Transition>
         <DotMap pictureArrayLength={pictureArray.length} currentIndex={currentPicture} />
+        <InfoContainer>
+          <TypeDiv>{type.match(/Entire/g) ? 'Entire house' + ' · ' + type.match(/..bed?/) : 'Private Room' + ' · ' + type.match(/..bed?/)}</TypeDiv>
+          <TitleDiv>{title.split(' ').slice(0, 5).join(' ')}</TitleDiv>
+          <PriceDiv>{price.replace(/per?/, '/')}</PriceDiv>
+          <ReviewDiv>{review}</ReviewDiv>
+        </InfoContainer>
       </CardDiv>
     )
   }

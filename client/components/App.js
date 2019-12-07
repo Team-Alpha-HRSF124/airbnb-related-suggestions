@@ -8,7 +8,7 @@ const MainDiv = styled.div({
   'display': 'flex',
   'height': '30%',
   'min-width': '500px',
-  'width': '750px',
+  'width': '1218px',
 });
 
 const ArrowContainerDiv = styled.div({

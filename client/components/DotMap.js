@@ -1,20 +1,20 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 // styled components
 const MainContainer = styled.div`
   position: relative;
-  top: 90%;
+  top: 70%;
   margin: auto;
   width: 120px;
-  height: 15px;
+  height: 25px;
   clip-path: inset(0px, 0px, 0px, 0px);
 `;
 
 const DotContainer = styled.div`
   position: absolute;
   margin: auto;
-  width: 100%
+  width: 100%;
   z-index: 0;
   display: flex;
   height: 100%;
