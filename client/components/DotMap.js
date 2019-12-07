@@ -6,7 +6,7 @@ const MainContainer = styled.div`
   position: relative;
   top: 70%;
   margin: auto;
-  width: 120px;
+  width: 90px;
   height: 25px;
   clip-path: inset(0px, 0px, 0px, 0px);
 `;
@@ -25,9 +25,10 @@ const Dot = styled.svg`
   text-align: center;
   transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
   flex: 1;
+  opacity: 0.6;
   ${ props => {
     if (props.focused) {
-      return 'transform: scale(2.0)';
+      return 'transform: scale(2.0); opacity: 1';
     }
   } }
 `;

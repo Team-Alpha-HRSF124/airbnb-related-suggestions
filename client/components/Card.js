@@ -42,6 +42,10 @@ const LeftButton = styled.button`
   left: 15px;
   focusable: false;
   outline: none;
+  transition: transform 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const RightButton = styled(LeftButton)`
@@ -155,7 +159,7 @@ class Card extends React.Component {
     })
   }
 
-  handleLeftArrowClick() {
+  handleRightArrowClick() {
     // transition into previous picture
     if (this.state.currentPicture === this.state.pictureArray.length - 1) {
       this.setState({
@@ -168,7 +172,7 @@ class Card extends React.Component {
     }
   }
 
-  handleRightArrowClick() {
+  handleLeftArrowClick() {
     // transition into next picture
     if (this.state.currentPicture === 0) {
       this.setState({

@@ -6,25 +6,23 @@ import styled from 'styled-components';
 
 // styled components
 const MainDiv = styled.div({
+  'position': 'relative',
   'margin': 'auto',
   'display': 'flex',
+  'flex-direction': 'row',
   'height': '30%',
   'min-width': '500px',
+  'margin': 'auto',
+  'width': '1100px',
+  'align-items': 'center',
 });
-
-// const ArrowContainerDiv = styled.div({
-//   'flex': 1,
-//   'z-index': 1
-// });
 
 const ArrowButtons = styled.button({
   'position': 'relative',
   'outline': 'none',
   'text-align': 'center',
   'border': 'none',
-  'font-size': '200%',
-  'vertical-align': 'middle',
-  'justify-content': 'center',
+  'height': '40px',
 });
 
 const MainContainer = styled.div({
