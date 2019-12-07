@@ -1,5 +1,7 @@
 import React from 'react';
 import Card from './Card';
+import LeftArrow from './LeftArrow';
+import RightArrow from './RightArrow';
 import styled from 'styled-components';
 
 // styled components
@@ -8,30 +10,29 @@ const MainDiv = styled.div({
   'display': 'flex',
   'height': '30%',
   'min-width': '500px',
-  'width': '1218px',
 });
 
-const ArrowContainerDiv = styled.div({
-  'flex': 1,
-  'z-index': 1
-});
+// const ArrowContainerDiv = styled.div({
+//   'flex': 1,
+//   'z-index': 1
+// });
 
 const ArrowButtons = styled.button({
+  'position': 'relative',
   'outline': 'none',
   'text-align': 'center',
   'border': 'none',
   'font-size': '200%',
   'vertical-align': 'middle',
-  'width': '100%',
-  'height': '100%',
   'justify-content': 'center',
 });
 
 const MainContainer = styled.div({
   'clip-path': 'inset(0px 0px -5px 0px)',
-  'flex': 10,
+  'width': '1010px',
   'position': 'relative',
-  'height': '300px'
+  'height': '300px',
+  'margin': 'auto',
 });
 
 const CardContainer = styled.div({
@@ -83,7 +84,7 @@ class App extends React.Component {
     const {activeCardIndex, activeCard, cardArray} = this.state;
     return (
       <MainDiv>
-        <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleLeftArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
+        <ArrowButtons onClick={ () => { this.handleLeftArrowClick() } }><LeftArrow /></ArrowButtons>
         <MainContainer>
           <CardContainer style={{'transform': `translateX(-${(activeCardIndex - 1) * (100 / cardArray.length)}%)`}}>
             {
@@ -93,7 +94,7 @@ class App extends React.Component {
             }
           </CardContainer>
         </MainContainer>
-        <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleRightArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
+        <ArrowButtons onClick={ () => { this.handleRightArrowClick() } }><RightArrow /></ArrowButtons>
       </MainDiv>
     );
   }

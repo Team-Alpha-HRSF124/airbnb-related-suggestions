@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import DotMap from './DotMap';
+import Star from './Star';
+import Heart from './Heart';
+import LeftArrow from './LeftArrow';
+import RightArrow from './RightArrow';
 // styled components
 
 const Images = styled.img({
@@ -34,18 +38,18 @@ const LeftButton = styled.button`
   width: 30px;
   font-size: 100%;
   opacity: 0.9;
-  top: 42%;
-  left: 5%;
+  top: 110px;
+  left: 15px;
   focusable: false;
   outline: none;
 `;
 
 const RightButton = styled(LeftButton)`
-  left: 80%;
+  left: 292px;
 `;
 
 const FavouriteButton = styled(RightButton)`
-  top: 2%;
+  top: 10px;
 `;
 
 const SlideShowContainer = styled.div({
@@ -75,6 +79,7 @@ const InfoContainer = styled.div`
 
 const TypeDiv = styled.div`
   font-size: 80%
+  margin: 2px;
 `;
 
 const TitleDiv = styled(TypeDiv)`
@@ -89,6 +94,7 @@ const ReviewDiv = styled(TypeDiv)`
   position: absolute;
   top: 0;
   right: 3px;
+  display: flex;
 `;
 
 // transition variables
@@ -199,9 +205,9 @@ class Card extends React.Component {
                 ...defaultStyle,
                 ...transitionStyles[state]
               }}>
-                <LeftButton onClick={ () => { this.handleLeftArrowClick() } }>{`<`}</LeftButton>
-                <RightButton onClick={ () => { this.handleRightArrowClick() } }>{`>`}</RightButton>
-                <FavouriteButton onClick={ () => { this.handleFavouriteClick() } }>{`♡`}</FavouriteButton>
+                <LeftButton onClick={ () => { this.handleLeftArrowClick() } }><LeftArrow /></LeftButton>
+                <RightButton onClick={ () => { this.handleRightArrowClick() } }><RightArrow /></RightButton>
+                <FavouriteButton onClick={ () => { this.handleFavouriteClick() } }><Heart /></FavouriteButton>
               </div>
             )
           }
@@ -211,7 +217,10 @@ class Card extends React.Component {
           <TypeDiv>{type.match(/Entire/g) ? 'Entire house' + ' · ' + type.match(/..bed?/) : 'Private Room' + ' · ' + type.match(/..bed?/)}</TypeDiv>
           <TitleDiv>{title.split(' ').slice(0, 5).join(' ')}</TitleDiv>
           <PriceDiv>{price.replace(/per?/, '/')}</PriceDiv>
-          <ReviewDiv>{review}</ReviewDiv>
+          <ReviewDiv>
+            <Star />
+            {review}
+          </ReviewDiv>
         </InfoContainer>
       </CardDiv>
     )
