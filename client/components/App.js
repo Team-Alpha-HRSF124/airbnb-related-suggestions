@@ -48,14 +48,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       activeCardIndex: 1,
-      activeCard: this.props.sampleData[0],
-      cardArray: this.props.sampleData,
+      activeCard: undefined,
+      cardArray: []
     }
   }
   
 
   componentDidMount() {
     // fetch request to populate data
+    const reqRoute = '/reqFromClient/' + this.props.requestHomeId;
+    fetch(reqRoute)
+      .then((res) => {
+        return res.text();
+      }).then((data) => {
+        let parsedData = JSON.parse(data);
+        this.setState({
+          cardArray: parsedData,
+        });
+      }).catch((err) => {
+        console.log('error encountered while retrieving mount data...', err);
+      });
   }
 
   handleLeftArrowClick() {

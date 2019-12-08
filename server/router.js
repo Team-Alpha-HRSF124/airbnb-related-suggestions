@@ -21,5 +21,20 @@ router.get('/somelistings', (req, res, next) => {
     })
 });
 
+router.get('/reqFromClient/:homeId', (req, res, next) => {
+  var homeId = req.params.homeId;
+  // generate random number based on seed
+  var randomDraw = helper.randomize(100);
+  db.findMultiple(randomDraw)
+    .then((data) => {
+      console.log('data retrieved!');
+      res.write(JSON.stringify(data));
+      res.status(200).end();
+    }).catch((err) => {
+      console.log('error encountered during data retrieval... ', err);
+      res.status(404).end();
+    })
+});
+
 
 module.exports = router;
