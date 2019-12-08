@@ -91,13 +91,38 @@ let create = ({interiorPicLinks, price, review, title, type}, callback = ()=>{})
 
 // retrieve some number of listings and return them as object to be parsed
 let findMultiple = (arrayOfRandomNumbers) => {
-  return Home.findAll({
-    where: {
-      home_id: {
-        [Op.or]: arrayOfRandomNumbers
-      }
-    }
-  })
+  const homeFindAll = Home.findAll({
+                          where: {
+                            home_id: {
+                              [Op.or]: arrayOfRandomNumbers
+                            }
+                          }
+                        });
+  const photoFindAll = Photo.findAll({
+                          where: {
+                            home_id: {
+                              [Op.or]: arrayOfRandomNumbers
+                            }
+                          }
+                        });
+  return Promise.all([homeFindAll, photoFindAll])
+            .then((data) => {
+              const homes = data[0];
+              const photos = data[1];
+              const resultArray = [];
+              for (var home of homes) {
+                const singleHomeInfo = {...home.dataValues};
+                const interiorPicLinks = [];
+                for (photo of photos) {
+                  if (photo.dataValues.home_id === home.dataValues.home_id) {
+                    interiorPicLinks.push(photo.dataValues.photoURL);
+                  }
+                }
+                singleHomeInfo.interiorPicLinks = interiorPicLinks;
+                resultArray.push(singleHomeInfo);
+              }
+              return resultArray;
+            })
 };
 
 // just to make sure the database is synced with the models

@@ -1,37 +1,36 @@
 import React from 'react';
 import Card from './Card';
+import LeftArrow from './LeftArrow';
+import RightArrow from './RightArrow';
 import styled from 'styled-components';
 
 // styled components
 const MainDiv = styled.div({
+  'position': 'relative',
   'margin': 'auto',
   'display': 'flex',
+  'flex-direction': 'row',
   'height': '30%',
   'min-width': '500px',
-  'width': '750px',
-});
-
-const ArrowContainerDiv = styled.div({
-  'flex': 1,
-  'z-index': 1
+  'margin': 'auto',
+  'width': '1100px',
+  'align-items': 'center',
 });
 
 const ArrowButtons = styled.button({
+  'position': 'relative',
   'outline': 'none',
   'text-align': 'center',
   'border': 'none',
-  'font-size': '200%',
-  'vertical-align': 'middle',
-  'width': '100%',
-  'height': '100%',
-  'justify-content': 'center',
+  'height': '40px',
 });
 
 const MainContainer = styled.div({
   'clip-path': 'inset(0px 0px -5px 0px)',
-  'flex': 10,
+  'width': '1010px',
   'position': 'relative',
-  'height': '300px'
+  'height': '300px',
+  'margin': 'auto',
 });
 
 const CardContainer = styled.div({
@@ -49,14 +48,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       activeCardIndex: 1,
-      activeCard: this.props.sampleData[0],
-      cardArray: this.props.sampleData,
+      activeCard: undefined,
+      cardArray: []
     }
   }
   
 
   componentDidMount() {
     // fetch request to populate data
+    const reqRoute = '/reqFromClient/' + this.props.requestHomeId;
+    fetch(reqRoute)
+      .then((res) => {
+        return res.text();
+      }).then((data) => {
+        let parsedData = JSON.parse(data);
+        this.setState({
+          cardArray: parsedData,
+        });
+      }).catch((err) => {
+        console.log('error encountered while retrieving mount data...', err);
+      });
   }
 
   handleLeftArrowClick() {
@@ -83,7 +94,7 @@ class App extends React.Component {
     const {activeCardIndex, activeCard, cardArray} = this.state;
     return (
       <MainDiv>
-        <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleLeftArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
+        <ArrowButtons onClick={ () => { this.handleLeftArrowClick() } }><LeftArrow /></ArrowButtons>
         <MainContainer>
           <CardContainer style={{'transform': `translateX(-${(activeCardIndex - 1) * (100 / cardArray.length)}%)`}}>
             {
@@ -93,7 +104,7 @@ class App extends React.Component {
             }
           </CardContainer>
         </MainContainer>
-        <ArrowContainerDiv><ArrowButtons onClick={ () => { this.handleRightArrowClick() } }>⬅</ArrowButtons></ArrowContainerDiv>
+        <ArrowButtons onClick={ () => { this.handleRightArrowClick() } }><RightArrow /></ArrowButtons>
       </MainDiv>
     );
   }
