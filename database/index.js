@@ -30,8 +30,8 @@ Home.init({
   },
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
-  },
+      allowNull: false,
+    },
   price: {
     type: Sequelize.STRING,
     allowNull: true,

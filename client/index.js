@@ -20,6 +20,6 @@ const AppWrapper = () => (
 );
 
 
-ReactDOM.render(<AppWrapper />, document.getElementById('app'));
+ReactDOM.render(<AppWrapper />, document.getElementById('related-suggestions'));
 
 
