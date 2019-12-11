@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --inspect=9230 --coverage",
-    "build": "webpack -d -w",
+    "build": "webpack --mode=production",
     "start": "nodemon --inspect ./server/",
     "db:pre-migrate": "node ./database/create.js",
     "db:seed": "npm run db:pre-migrate && node ./database/seed.js"
