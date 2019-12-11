@@ -31,7 +31,7 @@ const MainContainer = styled.div({
   'position': 'relative',
   'height': '300px',
   'margin': 'auto',
-});
+}); 
 
 const CardContainer = styled.div({
   'z-index': 0,
@@ -49,14 +49,14 @@ class App extends React.Component {
     this.state = {
       activeCardIndex: 1,
       activeCard: undefined,
-      cardArray: []
+      cardArray: this.props.sampleData
     }
   }
   
 
   componentDidMount() {
     // fetch request to populate data
-    const reqRoute = 'http://localhost:3001/reqFromClient/' + this.props.requestHomeId;
+    const reqRoute = '/reqFromClient/' + this.props.requestHomeId;
     fetch(reqRoute)
       .then((res) => {
         return res.text();

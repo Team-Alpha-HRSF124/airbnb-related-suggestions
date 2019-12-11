@@ -3,10 +3,10 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const Promise = require('bluebird');
 const sequelize = new Sequelize(config.sequelize.dbName, config.sequelize.username, config.sequelize.password, {
-  host: 'localhost',
+  host: 'db',
   dialect: 'mysql'
 });
-
+console.log(config.sequelize);
 // authentication
 sequelize
   .authenticate()
