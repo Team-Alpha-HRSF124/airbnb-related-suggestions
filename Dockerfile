@@ -1,6 +1,8 @@
-FROM node:8.15.1
+FROM node:10.15-alpine
 
-RUN mkdir -p /src/app
+RUN apk update && apk upgrade && apk add bash
+
+RUN bash -c "mkdir -p /src/app"
 
 WORKDIR /src/app
 
@@ -8,8 +10,8 @@ COPY . /src/app
 
 COPY wait-for-it.sh /wait-for-it.sh
 
-RUN chmod +x /wait-for-it.sh
+RUN bash -c "chmod +x /wait-for-it.sh"
 
-RUN npm install 
+RUN bash -c "npm install" 
 
 EXPOSE 8080

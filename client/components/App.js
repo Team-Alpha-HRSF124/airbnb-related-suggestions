@@ -56,7 +56,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // fetch request to populate data
-    const reqRoute = '/reqFromClient/' + this.props.requestHomeId;
+    const reqRoute = 'http://13.52.237.77/reqFromClient/' + this.props.requestHomeId;
     fetch(reqRoute)
       .then((res) => {
         return res.text();
