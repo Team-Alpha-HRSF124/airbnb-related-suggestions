@@ -16,7 +16,10 @@ function buildprocess(cb) {
       return resolve();
     });
   }).then(() => {
-    console.log('build complete');
+    console.log('build complete. Uploading to amazon s3...');
+    run ('aws2 s3 cp ./public/client/app.bundle.js s3://fecservices2/').exec();
+  }).catch((err) => {
+    console.log('there was an error', err);
   });
 }
 
