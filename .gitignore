@@ -2,3 +2,4 @@
 /config/
 /coverage/
 /docker-compose.yml
+/public/client/app.bundle.js
