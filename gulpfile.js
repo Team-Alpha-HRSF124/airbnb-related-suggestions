@@ -17,7 +17,7 @@ function buildprocess(cb) {
     });
   }).then(() => {
     console.log('build complete. Uploading to amazon s3...');
-    run ('aws2 s3 cp ./public/client/app.bundle.js s3://fecservices2/').exec();
+    run ('aws2 s3 cp ./public/client/app.bundle.js s3://fecservices2/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers').exec();
   }).catch((err) => {
     console.log('there was an error', err);
   });
