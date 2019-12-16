@@ -45,7 +45,7 @@ const DotMap = (props) => {
         {
           dotArray.map((dot, index) => (
             <Dot key={index} focused={index === currentIndex}>
-              <circle cx="50%" cy="50%" r="2px" fill="black"/>
+              <circle cx="50%" cy="50%" r="2px" fill="white"/>
             </Dot>
           ))
         }

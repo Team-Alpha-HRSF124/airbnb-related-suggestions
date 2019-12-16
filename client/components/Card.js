@@ -6,6 +6,7 @@ import Star from './Star';
 import Heart from './Heart';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
+// import Montserrat from 'https://fonts.googleapis.com/css?family=Montserrat&display=swap';
 // styled components
 
 const Images = styled.img({
@@ -78,7 +79,7 @@ const InfoContainer = styled.div`
   position: absolute;
   bottom: 0;
   left: 2px;
-  font-family: sans-serif;
+  font-family: Montserrat;
 `;
 
 const TypeDiv = styled.div`

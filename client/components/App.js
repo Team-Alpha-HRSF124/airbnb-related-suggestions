@@ -13,7 +13,7 @@ const MainDiv = styled.div({
   'height': '30%',
   'min-width': '500px',
   'margin': 'auto',
-  'width': '1100px',
+  'width': '1085px',
   'align-items': 'center',
 });
 
